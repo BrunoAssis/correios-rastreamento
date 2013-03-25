@@ -13,8 +13,6 @@ Gem::Specification.new do |s|
   s.files = ["lib/correios_rastreamento.rb", "lib/encomenda.rb", "lib/encomenda_status.rb"]
   s.homepage = %q{http://github.com/BrunoAssis/correios-rastreamento}
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{correios-rastreamento}
-  s.rubygems_version = %q{0.1}
   s.summary = %q{Biblioteca para rastreamento de pacotes dos Correios.}
 
   s.add_dependency(%q<hpricot>, [">= 0.6.164"])
