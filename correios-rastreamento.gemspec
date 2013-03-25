@@ -9,7 +9,6 @@ Gem::Specification.new do |s|
   s.date = %q{2013-03-25}
   s.description = %q{Biblioteca ruby para rastreamento de pacotes dos Correios.}
   s.email = %q{brunoassis@gmail.com}
-  s.executables = ["correios-rastreamento"]
   s.files = ["lib/correios_rastreamento.rb", "lib/encomenda.rb", "lib/encomenda_status.rb"]
   s.homepage = %q{http://github.com/BrunoAssis/correios-rastreamento}
   s.require_paths = ["lib"]
