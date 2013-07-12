@@ -12,7 +12,7 @@ class CorreiosRastreamento
   def self.encomenda(numero, url=@url_rastreamento)
     if numero != ""
       require 'net/ping'
-      ping_correios = Net::Ping::TCP.new('www.correios.com.br', 'http')
+      ping_correios = Net::Ping::HTTP.new('http://www.correios.com.br/', nil, 2)
       if ping_correios.ping?
         f = open("#{url}#{numero}")
         html = Hpricot(f.readlines.join("\n").encode("UTF-8"))
