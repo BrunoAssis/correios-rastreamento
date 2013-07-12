@@ -9,18 +9,20 @@ class CorreiosRastreamento
   @url_rastreamento = "#{@url}/sro_bin/txect01$.QueryList?P_ITEMCODE=&P_LINGUA=001&P_TESTE=&P_TIPO=001&P_COD_UNI="
 
   def self.encomenda(numero, url=@url_rastreamento)
-    f = open("#{url}#{numero}")
-    html = Hpricot(f.readlines.join("\n").encode("UTF-8"))
-    encomenda = Encomenda.new(numero)
+    if numero != ""
+      f = open("#{url}#{numero}")
+      html = Hpricot(f.readlines.join("\n").encode("UTF-8"))
+      encomenda = Encomenda.new(numero)
 
-    pula_tr = true
-    (html/"tr").each do |tr|
-      status = nil
-      status = self.parse_tr(encomenda, tr) if not pula_tr
-      encomenda << status if not status.nil?
-      pula_tr = false
+      pula_tr = true
+      (html/"tr").each do |tr|
+        status = nil
+        status = self.parse_tr(encomenda, tr) if not pula_tr
+        encomenda << status if not status.nil?
+        pula_tr = false
+      end
+      return encomenda
     end
-    return encomenda
   end
 
   private
