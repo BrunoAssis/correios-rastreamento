@@ -8,5 +8,6 @@ namespace :gem do
   desc "Instala todas as gems que a correios-rastreamento depende."
   task :install_dependencies do
     system "gem install hpricot"
+    system "gem install net-ping"
   end
 end

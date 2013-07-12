@@ -1,6 +1,7 @@
 require "rubygems"
 require "hpricot"
 require "open-uri"
+require "net/ping"
 require "encomenda"
 require "encomenda_status"
 
@@ -10,18 +11,26 @@ class CorreiosRastreamento
 
   def self.encomenda(numero, url=@url_rastreamento)
     if numero != ""
-      f = open("#{url}#{numero}")
-      html = Hpricot(f.readlines.join("\n").encode("UTF-8"))
-      encomenda = Encomenda.new(numero)
+      require 'net/ping'
+      ping_correios = Net::Ping::TCP.new('www.correios.com.br', 'http')
+      if ping_correios.ping?
+        f = open("#{url}#{numero}")
+        html = Hpricot(f.readlines.join("\n").encode("UTF-8"))
+        encomenda = Encomenda.new(numero)
 
-      pula_tr = true
-      (html/"tr").each do |tr|
-        status = nil
-        status = self.parse_tr(encomenda, tr) if not pula_tr
-        encomenda << status if not status.nil?
-        pula_tr = false
+        pula_tr = true
+        (html/"tr").each do |tr|
+          status = nil
+          status = self.parse_tr(encomenda, tr) if not pula_tr
+          encomenda << status if not status.nil?
+          pula_tr = false
+        end
+        return encomenda
+      else
+        return false
       end
-      return encomenda
+    else
+      return false
     end
   end
 
