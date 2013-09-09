@@ -5,7 +5,7 @@ h2. Usando a API Ruby
 <pre>
 require "rubygems"
 require "correios"
-encomenda = Correios.encomenda("ES446391025BR")
+encomenda = CorreiosRastreamento.encomenda("ES446391025BR")
 puts encomenda.numero
 encomenda.status.each do |status|
   puts status.data
@@ -18,16 +18,6 @@ end
 Outra forma de uso útil:
 
 <pre>
-encomenda = Correios.encomenda("ES446391025BR")
+encomenda = CorreiosRastreamento.encomenda("ES446391025BR")
 puts encomenda.ultimo_status_disponivel.to_s
 </pre>
-
-h2. Números de rastreamento para teste
-
-Outros números de encomenda para teste:
-
-  * RO811226537BR
-  * EC834786906BR
-  * SO376590583BR
-  * EC884014459BR
-  * EC726225124BR
